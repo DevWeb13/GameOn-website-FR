@@ -9,10 +9,22 @@ function editNav() {
 
 // DOM Elements
 const modalBg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-// Modal close
-const closeBtn = document.querySelector(".close");
+const modalBtns = document.querySelectorAll(".modal-btn");
+const formDatas = document.querySelectorAll(".formData");
+const form = document.querySelector("form"); //Formulaire
+const closeBtn = document.querySelector(".close"); // Modal close
+const inputs = document.querySelectorAll("input"); // Tous les inputs
+/**
+ * input id="quantity"
+ * @type    {any}
+ */
+const quantity = document.getElementById("quantity");
+
+/**
+ * input id="checkbox1"
+ * @type  {any}
+ */
+const checkbox1 = document.getElementById("checkbox1");
 
 // Regex elements
 // (< 2 characters; Pas de chiffres)
@@ -21,288 +33,355 @@ const firstLastRegex = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
 const emailRegex =
   /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
-/* ???????????????????????????????????????????????????????????????????????????????? */
-// Error elements
-// const errorFirst = document.getElementById("errorFirst");
-// const errorLast = document.getElementById("errorLast");
-// const errorEmail = document.getElementById("errorEmail");
-// const errorQuantity = document.getElementById("errorQuantity");
-/* ??????????????????????????????????????????????????????????????????????????????????????? */
+let quantityValue = quantity.value; //Nombre de tournois participés
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch modal form
-function launchModal() {
-  modalBg.style.display = "block";
-}
-
-// close modal
-function closeModal() {
-  modalBg.style.display = "none";
-}
+modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
+// close modal event
 closeBtn.addEventListener("click", closeModal);
-
-/* ********************* PRENOM ************************** */
-// (1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
-const first = document.getElementById("first");
-
-// Fonction de controle de la chaine de caractere du prenom
-function controlFirst() {
-  // Si la chaine a un minimum de 2 characters, qu'elle ne contient aucun chiffre ni caracteres spéciaux avec le test Regex, et qu'elle ne soit pas vide avec trim()
-  if (firstLastRegex.test(first.value.trim())) {
-    // On supprime le message d'erreur => true
-    errorFirst.innerHTML = "";
-    return true;
-  }
-  // Sinon on affiche le message d'erreur => false
-  errorFirst.innerHTML =
-    "Veuillez entrer 2 caractères littéral ou plus pour le champ du prénom.";
-  return false;
+/**
+ * Ouverture de la modal
+ * @return  {void}  Ajoute l'attribut "visible=true" à modalBg
+ */
+function launchModal() {
+  modalBg.setAttribute("visible", "true");
+}
+/**
+ * Fermeture de la modal
+ * @return  {void}  Supprime l'attribut "visible" à modalBg
+ */
+function closeModal() {
+  modalBg.removeAttribute("visible");
 }
 
-// Lors de l'input sue first on execute la fonction controlFirst();
-first.addEventListener("input", controlFirst);
+// Pour chaque element input
+inputs.forEach((input) => {
+  // On les passe a la validation
+  addValidation(input);
+});
 
-/* ********************* NOM ******************************************* */
-//(2) Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
-const last = document.getElementById("last");
+// Ajoute les data-error pour eviter que le formulaire soit valide au chargement de la page
+addDataError(formDatas);
 
-function controlLast() {
-  // Si la chaine a un minimum de 2 characters, qu'elle ne contient aucun chiffre ni caracteres spéciaux avec le test Regex, et qu'elle ne soit pas vide avec trim()
-  if (firstLastRegex.test(last.value.trim())) {
-    // On supprime le message d'erreur => true
-    errorLast.innerHTML = "";
-    return true;
-  }
-  // Sinon on affiche le message d'erreur => false
-  errorLast.innerHTML =
-    "Veuillez entrer 2 caractères littéral ou plus pour le champ du nom.";
-  return false;
-}
-
-// Lors de l'input sur last on execute la fonction controlLast();
-last.addEventListener("input", controlLast);
-
-/* ******************************* EMAIL ******************** */
-//(3) L'adresse électronique est valide.
-const email = document.getElementById("email");
-
-// Control de la validité de l'email avec le test Regex
-function controlEmail() {
-  // Control de la validité de l'email avec le test Regex
-  if (emailRegex.test(email.value)) {
-    // On supprime le message d'erreur => true
-    errorEmail.innerHTML = "";
-    return true;
-  }
-  // Sinon on affiche le message d'erreur => false
-  errorEmail.innerHTML = "Veuillez entrer une adresse Email valide.";
-  return false;
-}
-
-//Lors de l'input sur email on execute la fonction controlEmail();
-email.addEventListener("input", controlEmail);
-
-/* **************************** BIRTHDATE ************************** */
-const birthdate = document.getElementById("birthdate");
-
-let birthdateYear = "";
-let birthdateMonth = "";
-let birthdateDay = "";
-// récupération de la date actuelle
-let date = new Date();
-// récupération de l'année en cours
-let year = date.getFullYear();
-
-// Control de la validité de la date de naissance
-function controlBirthdate() {
-  // récuperation de l'année entrée par l'utilisateur
-  birthdateYear = parseInt(
-    birthdate.value[0] +
-      birthdate.value[1] +
-      birthdate.value[2] +
-      birthdate.value[3]
-  );
-  // récuperation du mois entrée par l'utilisateur
-  birthdateMonth = parseInt(birthdate.value[5] + birthdate.value[6]);
-  // récuperation du jour entrée par l'utilisateur
-  birthdateDay = parseInt(birthdate.value[8] + birthdate.value[9]);
-  // Si la chaine est vide
-  if (birthdate.value === "") {
-    // on affiche le message d'erreur => false
-    errorBirthdate.innerHTML = "Veuillez entrer une date de naissance valide.";
-    return false;
-  }
-
-  //Si l'année n'est pas comprise entre 1900 et l'année actuelle => false
-  if (birthdateYear < 1900 || birthdateYear > year) {
-    // on affiche le message d'erreur => false
-    errorBirthdate.innerHTML =
-      "Veuillez choisir une année entre 1900 et aujourd'hui";
-    return false;
-  }
-  // // Sinon si le mois n'est pas comprise entre 1 et 12 => false
-  // else if (birthdateMonth < 1 || birthdateMonth > 12) {
-  //   // on affiche le message d'erreur => false
-  //   errorBirthdate.innerHTML = "Veuillez choisir un mois entre 1 et 12";
-  //   return false;
-  // }
-  // // Sinon si c'est un mois à 31 jours et que birthdateDay n'est pas compris entre 1 et 31 => false
-  // else if (
-  //   (birthdateMonth === 1 ||
-  //     birthdateMonth === 3 ||
-  //     birthdateMonth === 5 ||
-  //     birthdateMonth === 7 ||
-  //     birthdateMonth === 8 ||
-  //     birthdateMonth === 10 ||
-  //     birthdateMonth === 12) &&
-  //   (birthdateDay < 1 || birthdateDay > 31)
-  // ) {
-  //   // on affiche le message d'erreur => false
-  //   errorBirthdate.innerHTML = "Veuillez choisir un jour entre 1 et 31";
-  //   return false;
-  // }
-  // // Sinon si c'est un mois à 30 jours et que birthdateDay n'est pas compris entre 1 et 30 => false
-  // else if (
-  //   (birthdateMonth === 4 ||
-  //     birthdateMonth === 6 ||
-  //     birthdateMonth === 9 ||
-  //     birthdateMonth === 11) &&
-  //   (birthdateDay < 1 || birthdateDay > 30)
-  // ) {
-  //   // on affiche le message d'erreur => false
-  //   errorBirthdate.innerHTML = "Veuillez choisir un jour entre 1 et 30";
-  //   return false;
-  // }
-  // // Sinon si c'est le mois de février et que birthdateDay n'est pas compris entre 1 et 29 => false
-  // else if (birthdateMonth === 2 && (birthdateDay < 1 || birthdateDay > 29)) {
-  //   // birthdateDay = "";
-  //   // on affiche le message d'erreur => false
-  //   errorBirthdate.innerHTML = "Veuillez choisir un jour entre 1 et 29";
-  //   return false;
-  // }
-  // Sinon ... ben tout est bon!! true
-  else {
-    // on supprime le message d'erreur => true
-    errorBirthdate.innerHTML = "";
-    return true;
-  }
-}
-birthdate.addEventListener("focus", controlBirthdate);
-//Lors de l'input sur birhtdate on execute controlBirthdate()
-birthdate.addEventListener("input", controlBirthdate);
-
-/* ********************* QUANTITY ********************************** */
-//(4) Pour le nombre de concours, une valeur numérique est saisie.
-const quantity = document.getElementById("quantity");
-
-// Control de la validité de quantity
-function controlQuantity() {
-  // Si la valeur numérique de la chaine est compris entre 0 est 100
-  if (parseInt(quantity.value) < 100 && parseInt(quantity.value) >= 0) {
-    // On suprime le message d'erreur => true
-    errorQuantity.innerHTML = "";
-    return true;
-  } else {
-    // Si la chaine est vide ou non comprise entre 0 et 100
-    // Sinon on affiche le message d'erreur => false
-    errorQuantity.innerHTML =
-      "Veuillez entrer une valeur numérique entre 0 et 99.";
-    return false;
+/**
+ * Au clic ou au changement d'etat valid ou renvoi msg erreur aux inputs.
+ * Au clic sur submit valid le formulaire ou renvoi msg erreur aux inputs
+ * @param   {HTMLInputElement}  input  element input du formulaire
+ * @return  {void} Valid ou renvoi msg erreur aux inputs
+ */
+function addValidation(input) {
+  switch (input.type) {
+    case "text":
+      input.oninput = function () {
+        validText(input);
+      };
+      break;
+    case "email":
+      input.oninput = function () {
+        validMail(input);
+      };
+      break;
+    case "date":
+      limitDate(input, "max", 18); // Age minimun 18ans
+      limitDate(input, "min", 100); // Age maximum 100ans
+      input.onchange = function () {
+        validDate(input);
+      };
+      break;
+    case "number":
+      input.oninput = function () {
+        validNumber(input, document.querySelector("input[name = location]"));
+      };
+      break;
+    case "checkbox":
+      if (input.name === "location") {
+        input.onchange = function () {
+          validCheckboxLocation(input, parseInt(quantity.value));
+        };
+      } else {
+        input.onchange = function () {
+          validCheckboxConditions(input, checkbox1);
+        };
+      }
+      break;
+    case "submit":
+      input.onclick = function (e) {
+        e.preventDefault();
+        if (errorTest(formDatas)) {
+          console.log(input);
+          createValidText();
+        } else {
+          inputs.forEach((input) => {
+            switch (input.type) {
+              case "text":
+                validText(input);
+                break;
+              case "email":
+                validMail(input);
+                break;
+              case "date":
+                validDate(input);
+                break;
+              case "number":
+                validNumber(
+                  input,
+                  document.querySelector("input[name = location]")
+                );
+                break;
+              case "checkbox":
+                if (input.name === "location") {
+                  validCheckboxLocation(input, parseInt(quantity.value));
+                } else {
+                  validCheckboxConditions(input, checkbox1);
+                }
+                break;
+            }
+          });
+        }
+      };
+      break;
+    default:
+      break;
   }
 }
 
-// Lors de l'input sur quantity on execute la fonction controlQuantity
-quantity.addEventListener("input", controlQuantity);
-// Lors de l'input sur quantity on execute la fonction controlQuantity
-quantity.addEventListener("input", controlBtRadio);
-
-/* ************************** BTRADIO ********************************************* */
-//(5) Un bouton radio est sélectionné.
-const btRadios = document.querySelectorAll("input[name=location]");
-console.log(btRadios);
-// Nombre de btRadios checked
-let numberOfBtRadioChecked = 0;
-// Control de la validité de btRadios
-function controlBtRadio() {
-  // Boucle pour savoir le nombre de btRadios checked
-  for (let i = 0; i < btRadios.length; i++) {
-    if (btRadios[i].checked) {
-      numberOfBtRadioChecked += 1;
+function createValidText() {
+  let validDiv = document.createElement("div");
+  validDiv.id = "validDiv";
+  modalBg.appendChild(validDiv);
+  validDiv.innerHTML = "<p>Merci ! Votre réservation à été recue</p>";
+  validDiv.onclick = function () {
+    form.reset();
+    addDataError(formDatas);
+    modalBg.removeChild(validDiv);
+    closeModal();
+  };
+}
+/**
+ * Permet de savoir si tous les inputs sont valides
+ *
+ * @param   {NodeListOf<Element>}  formDatas  Array (des parents des inputs(7))
+ *
+ * @return  {boolean}             Si aucune erreur => true
+ */
+function errorTest(formDatas) {
+  for (const formData of formDatas) {
+    if (formData.getAttribute("data-error")) {
+      return false;
     }
   }
-
-  // Si le nombre de villes cochés est superieur au nombre de tournois participé
-  if (numberOfBtRadioChecked > quantity.value) {
-    // On affiche le message d'erreur
-    errorBtRadio.innerHTML =
-      "Vous ne pouvez pas sélectionner plus de villes que de tournois participé";
-    // On remet le nombre de ville a zéro => false
-    numberOfBtRadioChecked = 0;
-    return false;
-    // Et si aucun btRadio checked  et quantitt.value > 0
-  } else if (numberOfBtRadioChecked == 0 && quantity.value > 0) {
-    // On affiche le message d'erreur
-    errorBtRadio.innerHTML = "Veuillez sélectionner une ville";
-    // On remet le nombre de ville a zéro => false
-    numberOfBtRadioChecked = 0;
-    return false;
-  } else {
-    // Sinon on supprime le message d'erreur
-    errorBtRadio.innerHTML = "";
-    // On remet le nombre de ville a zéro => tru
-    numberOfBtRadioChecked = 0;
-    return true;
-  }
+  return true;
 }
 
-// Pour chaque btRadio dans le tableau btRadios
-btRadios.forEach((btRadio) => {
-  // Lors de l'input sur un btRadio on execute controlBtRadio();
-  btRadio.addEventListener("input", controlBtRadio);
-  // Lors de l'input sur un btRadio on execute controlQuantity();
-  btRadio.addEventListener("input", controlQuantity);
-});
-/* ********************** CHECKBOX1 ******************************************************** */
-//(6) La case des conditions générales est cochée, l'autre case est facultative / peut être laissée décochée.
-const checkbox1 = document.getElementById("checkbox1");
-// Controle de la case conditions generales coché
-function controlCheckbox1() {
-  // Si la case est cochée
-  if (checkbox1.checked) {
-    // On supprime le message d'erreur => true
-    errorCheckbox1.innerHTML = "";
-    return true;
+/**
+ * Permet d'éviter que le formulaire soit valide au chargement de la page
+ *
+ * @param   {any}  formDatas  Array (des parents des inputs(7))
+ *
+ * @return  {void}             Ajoute atrr"data-error" sauf à 'conditions' qui est checked
+ */
+function addDataError(formDatas) {
+  for (const formData of formDatas) {
+    if (!formData.hasAttribute("id")) formData.setAttribute("data-error", " ");
   }
-  // On affiche le message d'erreur => false
-  errorCheckbox1.innerHTML = "Veuillez accepter les conditions d'utilisation";
-  return false;
+}
+/* **************************************** input[type=text] ************************** */
+/**
+ * Validation input[type="text"]
+ *
+ * @param   {HTMLInputElement}  input  input[type="text"]
+ *
+ * @return    {void}                      Message error
+ *
+ */
+function validText(input) {
+  let value = input.value.trim();
+  if (value.length < 2)
+    return showMessage(input, "Veuillez entrez au moins 2 caractères");
+  // si pas regex return showMessage...
+  else if (!firstLastRegex.test(value))
+    return showMessage(
+      input,
+      "Veuillez entrez seulement des caractéres litterales"
+    );
+  deleteMessage(input);
 }
 
-//Lors de l'input, si controlCheckbox1() = true on suprime le message d'erreur
-checkbox1.addEventListener("input", controlCheckbox1);
+/* ************************ input[type="date"] *************************************** */
 
-/* ********************** SUBMIT ******************************** */
-//Soumission du formulaire
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  //Conserver les données du formulaire (ne pas effacer le formulaire) lorsqu'il ne passe pas la validation.
-  e.preventDefault();
-  validate();
-});
+/**
+ * Ajoute un zero devant date si date < 10
+ * @param {string | number} dateNumber jour ou mois
+ * @returns {string} 0+jours ou 0+mois
+ */
+function addZero(dateNumber) {
+  if (dateNumber < 10) return "0" + dateNumber;
+  return dateNumber.toString();
+}
 
-function validate() {
-  if (
-    controlFirst() &&
-    controlLast() &&
-    controlEmail() &&
-    controlBirthdate() &&
-    controlQuantity() &&
-    controlBtRadio() &&
-    controlCheckbox1()
+/**
+ * donne une limite à l'input
+ * @param {HTMLInputElement} input input du formulaire
+ * @param {("min" | "max")} type l'extrémité à limiter
+ * @param {Number} gap le nombre d'années à décaler
+ * @returns {void} met à jour l'input avec une limite
+ */
+function limitDate(input, type, gap) {
+  const now = new Date(); // Récupération de la date actuelle
+  const year = now.getFullYear() - gap; // Année actuelle -18ans ou -100ans
+  const month = addZero(now.getUTCMonth()); // Ajout du zero(Mois actuel)
+  const day = addZero(now.getUTCDate()); // Ajout du zero(jour actuel)
+  input.setAttribute(type, `${year}-${month}-${day}`); // Ajoute l'attribut "Min" ou "max" avec la date correspondante.
+}
+
+/**
+ * Validation input[type="date"]
+ *
+ * @param {HTMLInputElement} input  input du formulaire
+ * @returns {Void} Affiche ou supprime le message d'erreur
+ */
+function validDate(input) {
+  let value = input.value;
+  let min = input.min;
+  let max = input.max;
+  if (value < min) return showMessage(input, "Age maximum 100 ans");
+  else if (value > max) return showMessage(input, "Age minimum 18 ans");
+  deleteMessage(input);
+}
+
+/* ****************************** input[type="mail"] ********************************** */
+
+/**
+ * Validation input[type="email"]
+ *
+ * @param {HTMLInputElement} input  input du formulaire
+ * @returns {void} Affiche ou supprime le message d'erreur
+ */
+function validMail(input) {
+  let value = input.value;
+  if (!emailRegex.test(value))
+    return showMessage(input, "Veuillez entrez une adresse email valide");
+  return deleteMessage(input);
+}
+
+/* ****************************************** input[type="number"] ********************** */
+/**
+ * @param {HTMLInputElement} input input du formulaire
+ * @param {HTMLInputElement} cible input du formulaire qui recevra le message erreur
+ */
+function validNumber(input, cible) {
+  let value = input.value;
+  if (parseInt(value) < 0 || parseInt(value) > 100 || value == "") {
+    deleteMessage(cible);
+    return showMessage(input, "Veuillez entrez une valeur entre 0 et 100");
+  } else if (
+    parseInt(value) > 0 &&
+    numberOfLocationChecked(inputsLocations) === 0
   ) {
-    return true;
+    deleteMessage(input);
+    return showMessage(cible, "Veuillez selectionner une ville");
+  } else if (
+    parseInt(value) == 0 &&
+    numberOfLocationChecked(inputsLocations) > 0
+  ) {
+    deleteMessage(input);
+    return showMessage(
+      cible,
+      "Vous ne pouvez pas selectionner une ville si vous n'avez jamais participé à un tournoi"
+    );
+  } else if (parseInt(value) < numberOfLocationChecked(inputsLocations)) {
+    return showMessage(
+      cible,
+      "Vous ne pouvez pas selectionner plus de villes que de tournoi participé"
+    );
+  } else if (value == "" && numberOfLocationChecked(inputsLocations) == 0) {
+    deleteMessage(cible);
+    return showMessage(input, "Veuillez entrez une valeur entre 0 et 100");
+  } else if (
+    parseInt(value) > 0 &&
+    numberOfLocationChecked(inputsLocations) > 0
+  ) {
+    deleteMessage(cible);
   }
-  return false;
+
+  deleteMessage(input);
+}
+
+/* ************************************** input[type="checkbox", name="location"] ********************** */
+
+/**
+ * @param {HTMLInputElement} input  input du formulaire
+ * @param {number} quantity nombre de tournois participés
+ */
+function validCheckboxLocation(input, quantity) {
+  if (numberOfLocationChecked(inputsLocations) === 0 && quantity > 0) {
+    return showMessage(input, "Veuillez sélectionner une ville");
+  } else if (
+    numberOfLocationChecked(inputsLocations) > 0 &&
+    (quantity == 0 || quantity.toString() == "NaN")
+  ) {
+    return showMessage(
+      input,
+      "Vous ne pouvez pas selectionner une ville si vous n'avez jamais participé à un tournoi"
+    );
+  } else if (numberOfLocationChecked(inputsLocations) > quantity) {
+    return showMessage(
+      input,
+      "Vous ne pouvez pas selectionner plus de ville que de tournoi participé"
+    );
+  } else {
+    return deleteMessage(input);
+  }
+}
+const inputsLocations = document.querySelectorAll("input[name = location]");
+/**
+ * Nombre de villes séléctionnées
+ * @param {NodeListOf} [array]
+ * @return {number} [return description]
+ */
+function numberOfLocationChecked(array) {
+  let numberInputLocationChecked = 0;
+  for (let element of array) {
+    if (element.checked) {
+      numberInputLocationChecked++;
+    }
+  }
+  return numberInputLocationChecked;
+}
+
+/* *************************** input[type="checkbox"] **************************** */
+
+/**
+ * [validCheckboxConditions description]
+ *
+ * @param   {HTMLInputElement} input  input du formulaire
+ * @param   {HTMLInputElement}  elm    element du formulaire
+ *
+ * @return  {void}         Affiche ou supprime le message erreur
+ */
+function validCheckboxConditions(input, elm) {
+  if (!elm.checked) {
+    return showMessage(
+      input,
+      "Veuillez accepter les conditions d'utilisations"
+    );
+  }
+  return deleteMessage(input);
+}
+/**
+ * Ajoute les attributs d'erreurs avec le msg correspondant au parent de input
+ *
+ * @param {HTMLInputElement} input  input du formulaire
+ * @param {string} msg        message d'erreur
+ */
+function showMessage(input, msg) {
+  const target = input.parentElement;
+  target.setAttribute("data-error", msg);
+  target.setAttribute("data-error-visible", "true");
+}
+
+function deleteMessage(input) {
+  const target = input.parentElement;
+  target.removeAttribute("data-error");
+  target.removeAttribute("data-error-visible");
 }
