@@ -1,13 +1,5 @@
-// function editNav() {
-//   var x = document.getElementById("myTopnav");
-//   if (x.className === "topnav") {
-//     x.className += " responsive";
-//   } else {
-//     x.className = "topnav";
-//   }
-// }
-
 // DOM Elements
+const myTopnav = document.getElementById("myTopnav");
 const modalBtns = document.querySelectorAll(".modal-btn"); //Tous le boutons de la modal
 const formDatas = document.querySelectorAll(".formData"); //Toutes les class="formdata"
 const inputs = document.querySelectorAll("input"); // Tous les inputs
@@ -31,6 +23,23 @@ const checkbox1 = document.getElementById("checkbox1"); //Conditions d'utilisati
 const firstLastRegex = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/; // (< 2 characters; Pas de chiffres)
 const emailRegex =
   /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/; // Vérification d'email
+/**
+ * [editNav description]
+ *
+ * @param   {HTMLElement}  elm  Header
+ *
+ * @return  {void}       [return description]
+ */
+function editNav(elm) {
+  if (elm.className === "topnav") {
+    elm.className += " responsive";
+  } else {
+    elm.className = "topnav";
+  }
+}
+myTopnav.onclick = function () {
+  editNav(myTopnav);
+};
 
 // launch modal event
 modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
