@@ -1,13 +1,27 @@
-// DOM Elements
-const myTopnav = document.getElementById("myTopnav");
-const modalBtns = document.querySelectorAll(".modal-btn"); //Tous le boutons de la modal
+/* ********************************* DOM ELEMENTS ************************************ */
+const modalBtns = document.querySelectorAll(".modal-btn"); //Tous le boutons d'ouverture de la modal
 const formDatas = document.querySelectorAll(".formData"); //Toutes les class="formdata"
 const inputs = document.querySelectorAll("input"); // Tous les inputs
 const inputsLocations = document.querySelectorAll("input[name = location]"); //Tous les inputs ayant l'attribut [name = location]
-
-const modalBg = document.querySelector(".bground"); //Modal
-const form = document.querySelector("form"); //Formulaire
+const btsCloseValidMsg = document.getElementsByName("button"); //Les 2 boutons du message de validation
+/**
+ * Bouton burger de navigation(<768px)
+ * @type {HTMLElement}
+ */
+const mainNavbar = document.querySelector(".main-navbar"); //Bouton burger de navigation(<768px)
+const form = document.querySelector("form");
+const modalBg = document.querySelector(".bground"); //Modal background
+/**
+ *  span .close
+ * @type {any}
+ */
 const closeBtn = document.querySelector(".close"); // Modal close
+const modalBody = document.querySelector(".modal-body"); //Modal body
+/**
+ * input submit
+ * @type    {any}
+ */
+const btnSubmit = document.querySelector(".btn-submit");
 /**
  * input id="quantity"
  * @type    {any}
@@ -19,54 +33,21 @@ const quantity = document.getElementById("quantity"); //Input tournoi participé
  */
 const checkbox1 = document.getElementById("checkbox1"); //Conditions d'utilisation
 
-// Regex elements
+/* ************************************ REGEX ************************************* */
 const firstLastRegex = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/; // (< 2 characters; Pas de chiffres)
 const emailRegex =
   /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/; // Vérification d'email
-/**
- * [editNav description]
- *
- * @param   {HTMLElement}  elm  Header
- *
- * @return  {void}       [return description]
- */
-function editNav(elm) {
-  if (elm.className === "topnav") {
-    elm.className += " responsive";
-  } else {
-    elm.className = "topnav";
-  }
-}
-myTopnav.onclick = function () {
-  editNav(myTopnav);
-};
 
-// launch modal event
-modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
-// close modal event
-closeBtn.addEventListener("click", closeModal);
+/* ************************************************ INPUTS ************************************ */
 /**
- * Ouverture de la modal
- * @return  {void}  Ajoute les data-error/Ajoute l'attribut "visible=true" à modalBg
+ * Pour chaque inputs
+ * @param   {HTMLInputElement}  input  Element input du formulaire
+ * @param {function} addValidation Fonction de verification des inputs
+ * @return  {void}         Chaque input est soumis à la function addValidation
  */
-function launchModal() {
-  addDataError(formDatas); // Ajoute les data-error pour eviter que le formulaire soit valide au chargement de la page
-  modalBg.setAttribute("visible", "true");
-}
-/**
- * Fermeture de la modal
- * @return  {void}  Supprime l'attribut "visible" à modalBg
- */
-function closeModal() {
-  modalBg.removeAttribute("visible");
-}
-
-// Pour chaque element input
 inputs.forEach((input) => {
-  // On les passe a la validation
   addValidation(input);
 });
-
 /**
  * Au clic ou au changement d'etat => valid ou renvoi msg erreur aux inputs.
  * Au clic sur submit => valid le formulaire ou renvoi msg erreur aux inputs
@@ -120,13 +101,18 @@ function addValidation(input) {
       break;
   }
 }
+
+/* ************************************* SUBMIT ***************************************** */
 /**
  * Verifie si le formulaire est valide
  * @return  {void}  Form valide => Affiche message de validation / Form invalide => Affiche les messages d'erreurs
  */
 function submit() {
-  if (errorTest(formDatas)) {
+  if (errorTest(formDatas) && btsCloseValidMsg.length < 2) {
     createValidText();
+    btsCloseValidMsg.forEach((button) => {
+      closeValidation(button);
+    });
   } else {
     inputs.forEach((input) => {
       switch (input.type) {
@@ -153,22 +139,40 @@ function submit() {
     });
   }
 }
+
 /**
- * Affiche le message de validation et le supprime au clic
- * @return  {void}  Affiche le message de validation et le supprime au clic
+ * Affiche le message de validation
+ * @return  {void}  Affiche le message de validation / Change les attributs des boutons de la modal
  */
 function createValidText() {
   const validDiv = document.createElement("div");
   validDiv.id = "validDiv";
-  modalBg.appendChild(validDiv);
+  modalBody.appendChild(validDiv);
   validDiv.innerHTML = "<p>Merci ! Votre réservation à été recue</p>";
-  validDiv.onclick = function () {
-    form.reset();
+  btnSubmit.setAttribute("type", "button");
+  btnSubmit.setAttribute("value", "Fermer");
+  btnSubmit.setAttribute("name", "button");
+  closeBtn.setAttribute("name", "button");
+}
+
+/**
+ * Ferme le message de validation
+ * @param {HTMLElement} button
+ * @return {void} Ferme le message de validation et la modal / Reinitialise le formulaire et les attributs des boutons
+ */
+function closeValidation(button) {
+  button.onclick = function () {
     addDataError(formDatas);
-    modalBg.removeChild(validDiv);
+    form.reset();
+    modalBody.removeChild(document.getElementById("validDiv"));
+    btnSubmit.removeAttribute("name");
+    closeBtn.removeAttribute("name");
+    btnSubmit.setAttribute("value", "C'est parti");
+    btnSubmit.setAttribute("type", "submit");
     closeModal();
   };
 }
+
 /**
  * Permet de savoir si tous les inputs sont valides
  * @param   {NodeListOf<Element>}  formDatas  Array (des parents des inputs(7))
@@ -365,4 +369,56 @@ function showMessage(input, msg) {
     ? target.removeAttribute("data-error")
     : target.setAttribute("data-error", msg);
   target.setAttribute("data-error-visible", (msg !== "").toString());
+}
+
+/* ******************************************** NAVIGATION ************************************* */
+/**
+ * Lors du clic sur Burger
+ *@return  {void}  Ouverture ou fermeture de la navigation
+ */
+mainNavbar.onclick = function () {
+  editNav(mainNavbar);
+};
+/**
+ * Ouverture et fermeture de la navigation
+ * @param   {Element}  elm  Header
+ * @return  {void}       Ajoute ou supprime la class responsive
+ */
+function editNav(elm) {
+  if (elm.className === "main-navbar") {
+    elm.className += " responsive";
+  } else {
+    elm.className = "main-navbar";
+  }
+}
+
+/* ******************************** MODAL EVENTS *********************************** */
+/**
+ * Au clic sur un des boutons
+ * @param   {HTMLButtonElement}  btn          Bouton d'ouverture de la modal
+ * @param   {function} launchModal  Fonction d'ouverture de la modal
+ * @return  {void}               Ouverture de la modal
+ */
+modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
+/**
+ * Ouverture de la modal
+ * @return  {void}  Ajoute les data-error/Ajoute l'attribut "visible=true" à modalBg
+ */
+function launchModal() {
+  addDataError(formDatas); // Ajoute les data-error pour eviter que le formulaire soit valide au chargement de la page
+  modalBg.setAttribute("visible", "true");
+}
+
+/**
+ * Au clic sur la croix
+ * @param   {function}  closeModal  Fonction de fermeture de la modal
+ * @return  {void}              Fermeture de la modal
+ */
+closeBtn.addEventListener("click", closeModal);
+/**
+ * Fermeture de la modal
+ * @return  {void}  Supprime l'attribut "visible" à modalBg
+ */
+function closeModal() {
+  modalBg.removeAttribute("visible");
 }
