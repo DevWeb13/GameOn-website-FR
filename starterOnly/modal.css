@@ -74,7 +74,7 @@ header .icon {
   display: none;
 }
 
-@media screen and (max-width: 1018px) {
+@media screen and (max-width: 1035px) {
   .main-navbar a {
     display: none;
   }
