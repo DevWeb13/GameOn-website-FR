@@ -27,16 +27,12 @@ p {
   padding: 0.5vw;
 }
 
-img {
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-}
-
 /* ***************************** HEADER **************************** */
 
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   overflow: hidden;
   margin: 30px 3.5%;
   height: 108px;
