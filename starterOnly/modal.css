@@ -170,7 +170,7 @@ main {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(108, 114, 167, 0.4);
+  background-color: white;
 }
 
 /* Apparition de la modal */
