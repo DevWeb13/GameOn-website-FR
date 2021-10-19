@@ -39,6 +39,7 @@ header {
   justify-content: space-between;
   overflow: hidden;
   margin: 30px 3.5%;
+  height: 108px;
 }
 
 /* .header-logo {
