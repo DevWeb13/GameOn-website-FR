@@ -41,7 +41,22 @@ header {
 .header-logo img {
   width: 293px;
 }
-
+@media screen and (max-width: 576px) {
+  header {
+    height: auto;
+    margin: 0 7.5%;
+  }
+  .header-logo img {
+    width: 103px;
+  }
+  .main-navbar a {
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .main-navbar i {
+    font-size: 1.4rem;
+  }
+}
 /* .main-navbar {
   float: right;
 } */
@@ -85,7 +100,7 @@ header .icon {
     font-size: 1.8rem;
   }
   .main-navbar a.icon:hover {
-    color: white;
+    background-color: white;
   }
   .main-navbar.responsive {
     display: flex;
