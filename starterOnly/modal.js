@@ -180,7 +180,8 @@ function closeValidation(button) {
  */
 function errorTest(formDatas) {
   for (const formData of formDatas) {
-    if (formData.getAttribute("data-error")) {
+    console.log(formData.getAttribute("data-error"));
+    if (formData.getAttribute("data-error") !== " ") {
       return false;
     }
   }
@@ -349,6 +350,9 @@ function numberOfLocationChecked(arr) {
  * @return  {void}         Affiche ou supprime le message d'erreur
  */
 function validCheckboxConditions(input, elm) {
+  if (input !== elm) {
+    return;
+  }
   if (input === elm && !input.checked) {
     return showMessage(
       input,
@@ -365,10 +369,17 @@ function validCheckboxConditions(input, elm) {
  */
 function showMessage(input, msg) {
   const target = input.parentElement;
-  msg === ""
-    ? target.removeAttribute("data-error")
-    : target.setAttribute("data-error", msg);
-  target.setAttribute("data-error-visible", (msg !== "").toString());
+  if (msg === "") {
+    target.setAttribute("data-error", " ");
+    target.removeAttribute("data-error-visible");
+  } else {
+    target.setAttribute("data-error", msg);
+    target.setAttribute("data-error-visible", (msg !== "").toString());
+  }
+  // msg === ""
+  //   ? target.removeAttribute("data-error")
+  //   : target.setAttribute("data-error", msg);
+  // target.setAttribute("data-error-visible", (msg !== "").toString());
 }
 
 /* ******************************************** NAVIGATION ************************************* */
