@@ -35,7 +35,7 @@ header {
   align-items: center;
   overflow: hidden;
   margin: 30px 3.5%;
-  height: 108px;
+  /* height: 108px; */
 }
 
 .header-logo img {
@@ -585,18 +585,26 @@ footer {
 
 @media screen and (max-width: 576px) {
   header {
-    height: 75px;
+    /* height: 75px; */
     margin: 0 7.5%;
+  }
+  .header-logo {
+    margin: 25px 0;
   }
   .header-logo img {
     width: 103px;
   }
+  .main-navbar.responsive a {
+    font-size: 12px;
+  }
   main {
     padding-top: 0;
   }
+  header .icon {
+    padding: 0 12px;
+  }
   .main-navbar a {
     margin-right: 0;
-    padding-right: 0;
   }
   .main-navbar i {
     font-size: 1.4rem;
