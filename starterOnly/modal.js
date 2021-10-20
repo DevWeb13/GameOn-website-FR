@@ -191,11 +191,15 @@ function errorTest(formDatas) {
 /**
  * Permet d'éviter que le formulaire soit valide au chargement de la page
  * @param   {NodeListOf}  formDatas  Array (des parents des inputs(7))
- * @return  {void}             Ajoute atrr"data-error" sauf à 'conditions' qui est checked
+ * @return  {void}             Ajoute atrr[data-error = "q"] sauf à 'conditions' qui est checked
  */
 function addDataError(formDatas) {
   for (const formData of formDatas) {
-    if (!formData.hasAttribute("id")) formData.setAttribute("data-error", " ");
+    if (!formData.childNodes[1].checked) {
+      formData.setAttribute("data-error", "q");
+    } else {
+      formData.setAttribute("data-error", " ");
+    }
   }
 }
 /* **************************************** input[type=text] ************************** */
