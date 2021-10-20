@@ -1,5 +1,5 @@
-# Projet GameOn
-## Créez une landing page avec Javascript
+# Créez une landing page avec Javascript
+
 Vous avez récemment été embauché comme développeur Front-End junior dans une PME, GameOn, spécialisée dans les conférences et les concours de jeux. Vous avez fait du shadowing de votre développeur principal, Erika, pour suivre son travail au quotidien.
 
 Un matin, vous recevez le courriel suivant : 
@@ -18,10 +18,11 @@ Ton travail consiste à ajouter le code JavaScript manquant pour que le formulai
 
 Nous avons reçu quelques commentaires de la part de l’équipe de QA récemment, donc lorsque tu soumets ton code, assure-toi de : 
 
-travailler sur un repo GitHub forké ;
-utiliser des fichiers séparés pour le HTML, le CSS et le JavaScript ;
-toujours commenter ton code (décrire chaque fonction et chaque classe, ainsi que les parties du code qui nécessitent plus de détails) ;
-tester manuellement les fonctionnalités, les entrées de formulaire et l'affichage responsive.
+* travailler sur un repo GitHub forké ;
+* utiliser des fichiers séparés pour le HTML, le CSS et le JavaScript ;
+* toujours commenter ton code (décrire chaque fonction et chaque classe, ainsi que les parties du code qui nécessitent plus de détails) ;
+* tester manuellement les fonctionnalités, les entrées de formulaire et l'affichage responsive.
+ 
 Quand tu auras terminé, on fera une révision du code tous les deux et on vérifiera qu’il est prêt à être mis en production. 
 
 Merci beaucoup, 
@@ -29,22 +30,29 @@ Merci beaucoup,
 Erika
 
 Vous ouvrez les maquettes pour avoir une idée de ce à quoi ressemble la page d'accueil : 
+
 ![image](https://user.oc-static.com/upload/2020/08/14/15974189716945_image2.png)
+
 Il y a beaucoup de travail à faire, mais vous êtes prêt à mettre en pratique vos compétences en JavaScript. 
 
-Livrables
+## Livrables
+
 Pour ce projet, vous devrez fournir les éléments suivants :
 
-Un lien vers votre repo GitHub contenant la base de code complète pour l'application.
-Soutenance
+* Un lien vers votre repo GitHub contenant la base de code complète pour l'application.
+ 
+## Soutenance
 La soutenance sera structurée comme suit, l'évaluateur jouant le rôle d'Erika Kipley :
 
-Présentation et explication des livrables (10 minutes)
-Discussion (15 min)
-L'évaluateur vous posera des questions sur votre méthodologie et vos résultats.
-Soyez prêt à défendre votre travail, car l'évaluateur mettra en question vos décisions.
+* Présentation et explication des livrables (10 minutes)  
+* Discussion (15 min)  
+  * L'évaluateur vous posera des questions sur votre méthodologie et vos résultats.
+  * Soyez prêt à défendre votre travail, car l'évaluateur mettra en question vos décisions.
+ 
 L'évaluateur cessera de jouer le rôle d'Erika Kipley cinq minutes avant la fin de la session afin que vous puissiez conclure ensemble.
 
-Compétences évaluées
-Programmer en JavaScript
+# Compétences évaluées
+
+* Programmer en JavaScript
+
 # [Site final](https://devweb13.github.io/GiulianoLoic_4_01102021/starterOnly/)
