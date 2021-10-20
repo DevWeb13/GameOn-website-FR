@@ -4,11 +4,12 @@ const formDatas = document.querySelectorAll(".formData"); //Toutes les class="fo
 const inputs = document.querySelectorAll("input"); // Tous les inputs
 const inputsLocations = document.querySelectorAll("input[name = location]"); //Tous les inputs ayant l'attribut [name = location]
 const btsCloseValidMsg = document.getElementsByName("button"); //Les 2 boutons du message de validation
+const mainNavbar = document.querySelector(".main-navbar"); // Navigation
 /**
  * Bouton burger de navigation(<768px)
  * @type {HTMLElement}
  */
-const mainNavbar = document.querySelector(".main-navbar"); //Bouton burger de navigation(<768px)
+const icon = document.querySelector(".icon"); //Bouton burger de navigation(<768px)
 const form = document.querySelector("form");
 const modalBg = document.querySelector(".bground"); //Modal background
 /**
@@ -180,7 +181,6 @@ function closeValidation(button) {
  */
 function errorTest(formDatas) {
   for (const formData of formDatas) {
-    console.log(formData.getAttribute("data-error"));
     if (formData.getAttribute("data-error") !== " ") {
       return false;
     }
@@ -387,7 +387,7 @@ function showMessage(input, msg) {
  * Lors du clic sur Burger
  *@return  {void}  Ouverture ou fermeture de la navigation
  */
-mainNavbar.onclick = function () {
+icon.onclick = function () {
   editNav(mainNavbar);
 };
 /**

@@ -594,8 +594,25 @@ footer {
   .header-logo img {
     width: 103px;
   }
+
   .main-navbar.responsive a {
     font-size: 12px;
+    margin: 0;
+  }
+
+  .main-navbar.responsive .icon {
+    animation-duration: 1s;
+    animation-name: iconSlide;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+    position: relative;
+  }
+  .main-navbar.responsive .navElt {
+    animation-duration: 2s;
+    animation-name: navEltSlide;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in;
+    position: relative;
   }
   main {
     padding-top: 0;
@@ -672,5 +689,31 @@ footer {
     font-size: 10px;
     margin-top: 7px;
     margin-bottom: 0px;
+  }
+}
+
+@keyframes iconSlide {
+  from {
+    right: 0;
+    top: 30px;
+    /* transform: translateX(0px) translateY(28px); */
+  }
+
+  to {
+    right: 180px;
+    top: 30px;
+    /* transform: translateX(-180px) translateY(28px); */
+  }
+}
+
+@keyframes navEltSlide {
+  0% {
+    top: -180px;
+  }
+  50% {
+    top: -180px;
+  }
+  100% {
+    top: 0px;
   }
 }
