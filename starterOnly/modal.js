@@ -420,6 +420,9 @@ modalBtns.forEach((btn) => btn.addEventListener("click", launchModal));
  * @return  {void}  Ajoute les data-error/Ajoute l'attribut "visible=true" à modalBg
  */
 function launchModal() {
+  if (mainNavbar.className === "main-navbar responsive") {
+    editNav(mainNavbar);
+  }
   addDataError(formDatas); // Ajoute les data-error pour eviter que le formulaire soit valide au chargement de la page
   modalBg.setAttribute("visible", "true");
 }
