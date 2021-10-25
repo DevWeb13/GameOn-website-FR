@@ -72,6 +72,9 @@ header .icon {
 }
 
 @media screen and (max-width: 1035px) {
+  body {
+    overflow-x: hidden;
+  }
   .main-navbar {
     display: flex;
     align-items: center;
