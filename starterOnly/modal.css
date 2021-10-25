@@ -504,6 +504,10 @@ input[name="button"] {
   max-height: 657px;
 }
 
+.hero-section > .btn-signup {
+  display: none;
+}
+
 .hero-content {
   padding: 51px 67px;
   grid-column: span 5;
@@ -696,10 +700,6 @@ input[name="button"] {
   font-size: 1rem;
   margin: 88px 0 63px;
   font-weight: bolder;
-}
-
-.hero-section > .btn-signup {
-  display: none;
 }
 
 /* ********************************* FOOTER ******************************* */
