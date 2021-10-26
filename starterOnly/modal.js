@@ -284,7 +284,7 @@ function validMail(input) {
  * @returns {void} Affiche ou supprime le message d'erreur
  */
 function validNumber(input, cible) {
-  const value = parseInt(input.value);
+  const value = parseInt(input.value, 10);
   if (value < 0 || value > 100 || value.toString() === "NaN") {
     return showMessage(input, "Veuillez entrez une valeur entre 0 et 100");
   }
@@ -355,7 +355,7 @@ function numberOfLocationChecked(arr) {
  */
 function validCheckboxConditions(input, elm) {
   if (input !== elm) {
-    return;
+    return null;
   }
   if (input === elm && !input.checked) {
     return showMessage(
