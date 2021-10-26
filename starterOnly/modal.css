@@ -91,9 +91,11 @@ header .icon {
     font-size: 1.8rem;
     width: min-content;
     transition: transform 1s ease-in-out;
+    transition-delay: 1s;
     transform: translateX(0);
     padding: 5px auto;
     text-decoration: none;
+    z-index: 6;
   }
 
   .main-navbar .icon:hover {
@@ -109,16 +111,18 @@ header .icon {
   .main-navbar nav {
     flex-direction: column;
     position: absolute;
-    right: -250px;
+    width: max-content;
+    right: 0;
     top: 0;
     text-align: left;
-    transition: transform 1s ease-in-out;
-    transform: translateX(0);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
   }
 
   .main-navbar.responsive nav {
-    transition: transform 1s ease-in-out;
-    transform: translateX(-250px);
+    transition: opacity 1s ease-in-out;
+    transition-delay: 1s;
+    opacity: 1;
   }
 }
 
@@ -140,12 +144,6 @@ header .icon {
     margin: 0;
   }
 
-  .main-navbar nav {
-    top: 0;
-    right: -450px;
-    border-radius: 15px;
-  }
-
   .main-navbar .navElt {
     border: 1px solid red;
     border-radius: 15px;
@@ -157,12 +155,7 @@ header .icon {
   }
 
   .main-navbar.responsive .icon {
-    transition: transform 1s ease-in-out 0s;
     transform: translateX(-120px);
-  }
-
-  .main-navbar.responsive nav {
-    transform: translateX(-450px);
   }
 }
 
