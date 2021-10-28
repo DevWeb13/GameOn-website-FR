@@ -57,4 +57,4 @@ L'évaluateur cessera de jouer le rôle d'Erika Kipley cinq minutes avant la fin
 - Programmer en JavaScript
 
 # [Site final](https://devweb13.github.io/GiulianoLoic_4_01102021/starterOnly/)
-# [Documentation JSDOC](https://devweb13.github.io/GiulianoLoic_4_01102021/docs/index.html/)
+# [Documentation JSDOC](https://devweb13.github.io/GiulianoLoic_4_01102021/docs/)
