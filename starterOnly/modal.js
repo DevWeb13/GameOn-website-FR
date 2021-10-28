@@ -1,3 +1,10 @@
+// @ts-nocheck
+/**
+ * @file modal.js est à la racine du projet GameOn
+ * @author DevWeb13
+ * @see <a href="https://devweb13.github.io/GiulianoLoic_4_01102021/starterOnly/" target="_blank"> Site GameOn </a>
+ */
+
 /* ********************************* DOM ELEMENTS ************************************ */
 /**
  * Tous les boutons d'ouverture de la modal
