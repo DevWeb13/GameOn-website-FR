@@ -4,12 +4,14 @@
   "description": "projet-4-ocr-dev-front-end",
   "main": "modal.js",
   "scripts": {
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "devweb13",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "eslint": "^7.32.0",
+    "jsdoc": "^3.6.7"
   }
 }
