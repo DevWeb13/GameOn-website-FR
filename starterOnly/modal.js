@@ -196,7 +196,10 @@ function errorTest(formDatas) {
 function addDataError(formDatas) {
   for (const formData of formDatas) {
     if (!formData.childNodes[1].checked) {
-      formData.setAttribute("data-error", "q");
+      formData.childNodes[1].setAttribute(
+        "data-error",
+        "Veuillez accepter les conditions d'utilisations"
+      );
     } else {
       formData.setAttribute("data-error", " ");
     }
