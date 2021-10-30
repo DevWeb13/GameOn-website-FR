@@ -1,3 +1,10 @@
+## Table des matiéres
+1. [Créez une landing page avec Javascript](#Créez une landing page avec Javascript)
+2. [Livrables](##Livrables)
+3. [Installation](#installation)
+4. [Collaboration](#collaboration)
+5. [FAQs](#faqs)
+
 # Créez une landing page avec Javascript
 
 Vous avez récemment été embauché comme développeur Front-End junior dans une PME, GameOn, spécialisée dans les conférences et les concours de jeux. Vous avez fait du shadowing de votre développeur principal, Erika, pour suivre son travail au quotidien.
