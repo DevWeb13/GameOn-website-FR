@@ -1,6 +1,6 @@
 ## Table des matiéres
 1. [Livrables](#CréezunelandingpageavecJavascript)
-2. [Livrables](##Livrables)
+2. [Livrables](#Livrables)
 3. [Installation](#installation)
 4. [Collaboration](#collaboration)
 5. [FAQs](#faqs)
