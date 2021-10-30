@@ -1,9 +1,10 @@
 ## Table des matiéres
-1. [Créez-une-landing-page-avec-Javascript](#Créez-une-landing-page-avec-Javascript)
-  1. [Livrables](#Livrables)
-3. [Installation](#installation)
-4. [Collaboration](#collaboration)
-5. [FAQs](#faqs)
+1. [Créez une landing page avec Javascript](#Créez-une-landing-page-avec-Javascript)
+     * [Livrables](#Livrables)
+     * [Soutenance](#Soutenance)
+2. [Compétences évaluées](#Compétences-évaluées)
+3. [Site final](#Site-final)
+4. [Documentation JSDOC](#Documentation-JSDOC)
 
 # Créez une landing page avec Javascript
 
@@ -65,4 +66,3 @@ L'évaluateur cessera de jouer le rôle d'Erika Kipley cinq minutes avant la fin
 
 # [Site final](https://devweb13.github.io/GiulianoLoic_4_01102021/starterOnly/)
 # [Documentation JSDOC](https://devweb13.github.io/GiulianoLoic_4_01102021/docs/)
-# [Présentation du projet](https://docs.google.com/presentation/d/19mJr19E54Sk5xEQW-Hdat4JmlFP1CBEMLnjIqkM132M/edit?usp=sharing)
