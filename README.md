@@ -58,3 +58,4 @@ L'évaluateur cessera de jouer le rôle d'Erika Kipley cinq minutes avant la fin
 
 # [Site final](https://devweb13.github.io/GiulianoLoic_4_01102021/starterOnly/)
 # [Documentation JSDOC](https://devweb13.github.io/GiulianoLoic_4_01102021/docs/)
+# [Présentation du projet](https://docs.google.com/presentation/d/19mJr19E54Sk5xEQW-Hdat4JmlFP1CBEMLnjIqkM132M/edit?usp=sharing)
