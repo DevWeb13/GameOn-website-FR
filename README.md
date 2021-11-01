@@ -1,4 +1,4 @@
-## Table des matiéres
+## Table des matières
 1. [Créez une landing page avec Javascript](#Créez-une-landing-page-avec-Javascript)
      * [Livrables](#Livrables)
      * [Soutenance](#Soutenance)
