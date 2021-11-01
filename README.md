@@ -5,6 +5,7 @@
 2. [Compétences évaluées](#Compétences-évaluées)
 3. [Site final](#Site-final)
 4. [Documentation JSDOC](#Documentation-JSDOC)
+5. [Présentation du projet](#Présentation-du-projet)
 
 # Créez une landing page avec Javascript
 
@@ -66,3 +67,4 @@ L'évaluateur cessera de jouer le rôle d'Erika Kipley cinq minutes avant la fin
 
 # [Site final](https://devweb13.github.io/GiulianoLoic_4_01102021/starterOnly/)
 # [Documentation JSDOC](https://devweb13.github.io/GiulianoLoic_4_01102021/docs/)
+# [Présentation du projet](https://docs.google.com/presentation/d/19mJr19E54Sk5xEQW-Hdat4JmlFP1CBEMLnjIqkM132M/edit?usp=sharing)
